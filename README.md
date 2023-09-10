@@ -1,0 +1,21 @@
+# MessageBrokers
+
+cd c:\kafka_2.12-3.4.0\
+zookeeper-server-start.bat config\zookeeper.properties
+
+(or use KRAFT
+kafka-storage.bat random-uuid
+kafka-storage.bat format -t HHk51YQ4SOahPNplU9ULjw -c config/kraft/server.properties
+kafka-server-start.bat config/kraft/server.properties
+)
+
+cd c:\kafka_2.12-3.4.0\
+kafka-server-start.bat config\server.properties
+
+kafka-topics.bat --topic testTopic --create --bootstrap-server 127.0.0.1:9092
+
+kafka-console-producer.bat --bootstrap-server 127.0.0.1:9092 --topic testTopic 
+
+kafka-console-producer --bootstrap-server localhost:9092 --topic testTopic --property parse.key=true --property key.separator=,
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic testTopic --from-beginning
